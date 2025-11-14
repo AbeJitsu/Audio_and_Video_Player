@@ -9,19 +9,145 @@
 <body>
     <h1>Audio and Video Player</h1>
 
-    <section>
+    <!-- ============================================ -->
+    <!-- VIDEO PLAYER SECTION -->
+    <!-- This section contains the custom video player -->
+    <!-- ============================================ -->
+    <section class="video-section">
         <h2>Featured Video: What is the Map Method?</h2>
-        <video width="640" controls>
-            <source src="https://cdn.freecodecamp.org/curriculum/labs/what-is-the-map-method-and-how-does-it-work.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+
+        <!-- The video element without native controls -->
+        <div class="video-container">
+            <video id="video-player" width="640">
+                <source src="https://cdn.freecodecamp.org/curriculum/labs/what-is-the-map-method-and-how-does-it-work.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <!-- Loading spinner shown while video loads -->
+            <div class="loading-spinner" id="video-loading">
+                <div class="spinner"></div>
+            </div>
+
+            <!-- Custom video controls -->
+            <div class="video-controls">
+                <!-- Play/Pause button -->
+                <button class="control-btn" id="video-play-pause" aria-label="Play/Pause video">
+                    <span class="icon-play">▶</span>
+                </button>
+
+                <!-- Progress bar for video timeline -->
+                <div class="progress-container">
+                    <div class="progress-bar" id="video-progress">
+                        <div class="progress-filled" id="video-progress-filled"></div>
+                    </div>
+                </div>
+
+                <!-- Time display: shows current time / total duration -->
+                <div class="time-display">
+                    <span id="video-current-time">0:00</span>
+                    <span>/</span>
+                    <span id="video-duration">0:00</span>
+                </div>
+
+                <!-- Volume controls -->
+                <div class="volume-controls">
+                    <button class="control-btn" id="video-mute" aria-label="Mute/Unmute">
+                        <span class="icon-volume">🔊</span>
+                    </button>
+                    <input type="range" id="video-volume" class="volume-slider" min="0" max="100" value="100" aria-label="Volume">
+                </div>
+
+                <!-- Playback speed selector -->
+                <select id="video-speed" class="speed-selector" aria-label="Playback speed">
+                    <option value="0.5">0.5x</option>
+                    <option value="1" selected>1x</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="2">2x</option>
+                </select>
+
+                <!-- Fullscreen toggle button -->
+                <button class="control-btn" id="video-fullscreen" aria-label="Fullscreen">
+                    <span class="icon-fullscreen">⛶</span>
+                </button>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>Featured Audio: Sailing Away</h2>
-        <audio controls loop src="https://cdn.freecodecamp.org/curriculum/js-music-player/sailing-away.mp3">
-            Your browser does not support the audio element.
-        </audio>
+    <!-- ============================================ -->
+    <!-- AUDIO PLAYER SECTION -->
+    <!-- This section contains the custom audio player with playlist -->
+    <!-- ============================================ -->
+    <section class="audio-section">
+        <h2>Music Player</h2>
+
+        <div class="audio-player-container">
+            <!-- Album art display area -->
+            <div class="album-art">
+                <img id="album-art-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%234a69bd' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='60' fill='white' text-anchor='middle' dy='.3em'%3E♪%3C/text%3E%3C/svg%3E" alt="Album artwork">
+            </div>
+
+            <!-- Track information display -->
+            <div class="track-info">
+                <h3 class="track-title" id="track-title">Sailing Away</h3>
+                <p class="track-artist" id="track-artist">Unknown Artist</p>
+            </div>
+
+            <!-- The audio element without native controls -->
+            <audio id="audio-player">
+                Your browser does not support the audio element.
+            </audio>
+
+            <!-- Progress bar for audio timeline -->
+            <div class="progress-container">
+                <div class="progress-bar" id="audio-progress">
+                    <div class="progress-filled" id="audio-progress-filled"></div>
+                </div>
+            </div>
+
+            <!-- Time display for audio -->
+            <div class="time-display">
+                <span id="audio-current-time">0:00</span>
+                <span>/</span>
+                <span id="audio-duration">0:00</span>
+            </div>
+
+            <!-- Main playback controls -->
+            <div class="audio-controls">
+                <!-- Shuffle button -->
+                <button class="control-btn" id="audio-shuffle" aria-label="Shuffle playlist">
+                    <span class="icon-shuffle">🔀</span>
+                </button>
+
+                <!-- Previous track button -->
+                <button class="control-btn" id="audio-previous" aria-label="Previous track">
+                    <span class="icon-previous">⏮</span>
+                </button>
+
+                <!-- Play/Pause button (larger, primary control) -->
+                <button class="control-btn control-btn-large" id="audio-play-pause" aria-label="Play/Pause">
+                    <span class="icon-play">▶</span>
+                </button>
+
+                <!-- Next track button -->
+                <button class="control-btn" id="audio-next" aria-label="Next track">
+                    <span class="icon-next">⏭</span>
+                </button>
+
+                <!-- Repeat button -->
+                <button class="control-btn" id="audio-repeat" aria-label="Repeat mode">
+                    <span class="icon-repeat">🔁</span>
+                </button>
+            </div>
+
+            <!-- Playlist section -->
+            <div class="playlist-container">
+                <h3 class="playlist-title">Playlist</h3>
+                <ul class="playlist" id="playlist">
+                    <!-- Playlist items will be dynamically added by JavaScript -->
+                    <!-- Each track includes: title, artist, and duration -->
+                </ul>
+            </div>
+        </div>
     </section>
 
     <script src="script.js"></script>

@@ -1,4 +1,47 @@
-/* Audio and Video Player Styles */
+/* ============================================ */
+/* CSS CUSTOM PROPERTIES */
+/* This section defines our color system and reusable values */
+/* ============================================ */
+
+:root {
+    /* Dark Blue - Primary backgrounds and text */
+    --color-dark-blue-primary: #1a1f3a;
+    --color-dark-blue-secondary: #2c3e65;
+
+    /* Mid Blue - Accents and interactive elements */
+    --color-mid-blue-primary: #4a69bd;
+    --color-mid-blue-secondary: #5f7ccd;
+
+    /* Cherry Red - Highlights and active states */
+    --color-cherry-red-primary: #e74c3c;
+    --color-cherry-red-secondary: #c0392b;
+
+    /* Whites - Text and card backgrounds */
+    --color-white: #ffffff;
+    --color-white-soft: #f8f9fa;
+    --color-white-muted: #ecf0f1;
+
+    /* Spacing system - based on 8px units */
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 40px;
+
+    /* Border radius for modern feel */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    /* Transition timing */
+    --transition-speed: 300ms;
+    --transition-timing: ease;
+}
+
+/* ============================================ */
+/* RESET AND BASE STYLES */
+/* Remove browser defaults and set foundation */
+/* ============================================ */
 
 * {
     margin: 0;
@@ -7,85 +50,597 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: linear-gradient(135deg, var(--color-dark-blue-primary) 0%, var(--color-dark-blue-secondary) 100%);
     min-height: 100vh;
-    padding: 20px;
-    color: #333;
+    padding: var(--spacing-md);
+    color: var(--color-dark-blue-primary);
 }
+
+/* ============================================ */
+/* MAIN HEADING */
+/* Page title styling */
+/* ============================================ */
 
 h1 {
     text-align: center;
-    color: white;
+    color: var(--color-white);
     font-size: 2.5rem;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xl);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* ============================================ */
+/* SECTION CONTAINERS */
+/* Card-based design with elevation */
+/* ============================================ */
+
 section {
-    background: white;
-    border-radius: 15px;
-    padding: 30px;
-    margin: 0 auto 30px;
-    max-width: 700px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin: 0 auto var(--spacing-lg);
+    max-width: 800px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing);
 }
 
 section:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
 }
 
 h2 {
-    color: #667eea;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    color: var(--color-mid-blue-primary);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
     text-align: center;
 }
 
-video {
-    display: block;
+/* ============================================ */
+/* VIDEO PLAYER CONTAINER */
+/* Houses the video element and custom controls */
+/* ============================================ */
+
+.video-container {
+    position: relative;
     width: 100%;
     max-width: 640px;
     margin: 0 auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background: var(--color-dark-blue-primary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
 }
 
-audio {
+#video-player {
     display: block;
     width: 100%;
-    margin: 0 auto;
-    border-radius: 50px;
+    height: auto;
 }
 
-/* Responsive Design */
+/* ============================================ */
+/* AUDIO PLAYER CONTAINER */
+/* Main container for the music player */
+/* ============================================ */
+
+.audio-player-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Album art display - square image with rounded corners */
+.album-art {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto var(--spacing-md);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.album-art img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Track information - title and artist */
+.track-info {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.track-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-dark-blue-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.track-artist {
+    font-size: 1rem;
+    color: var(--color-mid-blue-primary);
+    font-weight: 400;
+}
+
+/* ============================================ */
+/* CUSTOM CONTROL BUTTONS */
+/* Styled buttons for play, pause, next, etc. */
+/* ============================================ */
+
+.control-btn {
+    background: var(--color-mid-blue-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-speed) var(--transition-timing);
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(74, 105, 189, 0.3);
+}
+
+.control-btn:hover {
+    background: var(--color-mid-blue-secondary);
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(74, 105, 189, 0.4);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.control-btn:focus {
+    outline: 3px solid var(--color-cherry-red-primary);
+    outline-offset: 2px;
+}
+
+/* Larger play/pause button for audio player */
+.control-btn-large {
+    width: 64px;
+    height: 64px;
+    font-size: 1.5rem;
+    background: var(--color-cherry-red-primary);
+}
+
+.control-btn-large:hover {
+    background: var(--color-cherry-red-secondary);
+}
+
+/* Active state for shuffle and repeat buttons */
+.control-btn.active {
+    background: var(--color-cherry-red-primary);
+}
+
+.control-btn.active:hover {
+    background: var(--color-cherry-red-secondary);
+}
+
+/* ============================================ */
+/* PROGRESS BAR */
+/* Shows playback progress for video and audio */
+/* ============================================ */
+
+.progress-container {
+    width: 100%;
+    margin: var(--spacing-sm) 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--color-white-muted);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: height var(--transition-speed) var(--transition-timing);
+}
+
+.progress-bar:hover {
+    height: 12px;
+}
+
+.progress-filled {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-mid-blue-primary), var(--color-cherry-red-primary));
+    border-radius: 4px;
+    width: 0%;
+    transition: width 100ms linear;
+}
+
+/* ============================================ */
+/* TIME DISPLAY */
+/* Shows current time and total duration */
+/* ============================================ */
+
+.time-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-dark-blue-secondary);
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* ============================================ */
+/* VIDEO CONTROLS BAR */
+/* Bottom bar with all video control buttons */
+/* ============================================ */
+
+.video-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: rgba(26, 31, 58, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.video-controls .progress-container {
+    flex: 1;
+    margin: 0;
+}
+
+.video-controls .time-display {
+    color: var(--color-white-soft);
+    margin: 0;
+    font-size: 0.75rem;
+    min-width: 80px;
+}
+
+/* ============================================ */
+/* VOLUME CONTROLS */
+/* Volume slider and mute button */
+/* ============================================ */
+
+.volume-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.volume-slider {
+    width: 80px;
+    height: 6px;
+    background: var(--color-white-muted);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--color-cherry-red-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform var(--transition-speed) var(--transition-timing);
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--color-cherry-red-primary);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform var(--transition-speed) var(--transition-timing);
+}
+
+.volume-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* ============================================ */
+/* PLAYBACK SPEED SELECTOR */
+/* Dropdown for choosing video playback speed */
+/* ============================================ */
+
+.speed-selector {
+    background: var(--color-mid-blue-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background var(--transition-speed) var(--transition-timing);
+    font-weight: 500;
+}
+
+.speed-selector:hover {
+    background: var(--color-mid-blue-secondary);
+}
+
+.speed-selector:focus {
+    outline: 2px solid var(--color-cherry-red-primary);
+    outline-offset: 2px;
+}
+
+/* ============================================ */
+/* AUDIO PLAYER CONTROLS */
+/* Control buttons for the audio player */
+/* ============================================ */
+
+.audio-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-md) 0;
+}
+
+/* ============================================ */
+/* PLAYLIST */
+/* List of available tracks */
+/* ============================================ */
+
+.playlist-container {
+    margin-top: var(--spacing-lg);
+    background: var(--color-white-soft);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+}
+
+.playlist-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-dark-blue-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.playlist {
+    list-style: none;
+}
+
+.playlist-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    background: var(--color-white);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-speed) var(--transition-timing);
+    border: 2px solid transparent;
+}
+
+.playlist-item:hover {
+    background: var(--color-white-muted);
+    transform: translateX(4px);
+}
+
+.playlist-item.active {
+    border-color: var(--color-cherry-red-primary);
+    background: var(--color-white-muted);
+}
+
+.playlist-item-info {
+    flex: 1;
+}
+
+.playlist-item-title {
+    font-weight: 600;
+    color: var(--color-dark-blue-primary);
+    margin-bottom: 4px;
+}
+
+.playlist-item-artist {
+    font-size: 0.875rem;
+    color: var(--color-mid-blue-primary);
+}
+
+.playlist-item-duration {
+    font-size: 0.875rem;
+    color: var(--color-dark-blue-secondary);
+    font-weight: 500;
+}
+
+/* ============================================ */
+/* LOADING SPINNER */
+/* Shown while media is loading */
+/* ============================================ */
+
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.loading-spinner.active {
+    display: block;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--color-white-muted);
+    border-top-color: var(--color-cherry-red-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ============================================ */
+/* ANIMATIONS */
+/* Keyframe animations for smooth effects */
+/* ============================================ */
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Play/pause icon morphing - subtle fade effect */
+.icon-play, .icon-pause {
+    transition: opacity var(--transition-speed) var(--transition-timing);
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN: TABLET */
+/* Adjustments for tablet screens (768px - 1024px) */
+/* ============================================ */
+
+@media (max-width: 1024px) {
+    section {
+        max-width: 90%;
+    }
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN: MOBILE */
+/* Adjustments for mobile screens (< 768px) */
+/* ============================================ */
+
 @media (max-width: 768px) {
+    :root {
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+    }
+
     h1 {
         font-size: 2rem;
+        margin-bottom: var(--spacing-md);
+    }
+
+    h2 {
+        font-size: 1.5rem;
     }
 
     section {
-        padding: 20px;
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+    }
+
+    /* Larger touch targets for mobile */
+    .control-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 1.4rem;
+    }
+
+    .control-btn-large {
+        width: 72px;
+        height: 72px;
+        font-size: 1.75rem;
+    }
+
+    /* Simplified video controls for mobile */
+    .video-controls {
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+    }
+
+    .volume-controls {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+        margin-top: var(--spacing-xs);
+    }
+
+    .volume-slider {
+        width: 150px;
+    }
+
+    /* Stack playlist items better on mobile */
+    .playlist-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+
+    .playlist-item-duration {
+        align-self: flex-end;
+    }
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN: SMALL MOBILE */
+/* Further adjustments for small screens (< 480px) */
+/* ============================================ */
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
     }
 
     h2 {
         font-size: 1.25rem;
     }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-    }
 
     section {
-        padding: 15px;
-        margin-bottom: 20px;
+        padding: var(--spacing-sm);
     }
 
-    h2 {
-        font-size: 1.1rem;
+    .track-title {
+        font-size: 1.25rem;
     }
+
+    .track-artist {
+        font-size: 0.875rem;
+    }
+
+    /* Compact audio controls */
+    .audio-controls {
+        gap: var(--spacing-xs);
+    }
+
+    .control-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+
+    .control-btn-large {
+        width: 64px;
+        height: 64px;
+        font-size: 1.5rem;
+    }
+}
+
+/* ============================================ */
+/* ACCESSIBILITY */
+/* Focus states for keyboard navigation */
+/* ============================================ */
+
+/* Skip to content link for screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Ensure all interactive elements have visible focus states */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.playlist-item:focus-visible {
+    outline: 3px solid var(--color-cherry-red-primary);
+    outline-offset: 2px;
 }
